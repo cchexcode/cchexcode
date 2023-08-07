@@ -1,0 +1,98 @@
+version: "0.6"
+
+env:
+  vars:
+    SHELLOPTS: 'errexit:nounset:xtrace:pipefail'
+
+nodes:
+  canary:render:
+    description: "Renders a new canary statement file using `complate`."
+    tasks:
+      - script: |-
+          rm -rf ./.release || true
+          mkdir ./.release
+          mkdir ./.release/temp
+          mkdir ./.release/assets
+          mkdir ./.release/targets
+          complate render -c ./complate.yaml -tcanary --trust > ./.release/targets/canary.md
+          complate render -c ./complate.yaml -t "notes:header" --trust > ./.release/notes.md
+          printf "\n" >> ./.release/notes.md
+
+  canary:sign:
+    description: "Signs the assets."
+    pre:
+      - name: "canary:render"
+    tasks:
+      - script: |-
+          echo "## Assets\n" >> ./.release/notes.md
+          for file in ./.release/targets/*; do
+            fn=$(basename -- ${file})
+            mkdir ./.release/temp/${fn}
+
+            cat ${file} | shasum -a512 | awk '{print $1}' > ./.release/assets/${fn}.sha512
+            complate render -c ./complate.yaml -t "asset:base" -v "asset=${fn}" -v "hash=$(cat ./.release/assets/${fn}.sha512)" --trust >> ./.release/notes.md
+            printf "\n" >> ./.release/notes.md
+
+            for signer in ./pgp/*; do
+              signerfn=$(basename -- ${signer%.pub})
+              gpg --default-key="${signerfn}" --armor --detach-sig --output ./.release/temp/${fn}/${signerfn}.sig ${file}
+
+              complate render -c ./complate.yaml -t "asset:signer" -v "signer=${signerfn}" -v "signature=./.release/temp/${fn}/${signerfn}.sig" --trust >> ./.release/notes.md
+            done
+            printf "\n" >> ./.release/notes.md
+            cd ./.release/temp/${fn}
+            tar -czf ../../assets/${fn}.signatures.tar.gz .
+            cd ../../../
+            
+            echo ""
+          done
+
+          echo "## Signers\n" >> ./.release/notes.md
+          for signer in ./pgp/*; do
+            signerfn=$(basename -- ${signer%.pub})
+            complate render -c ./complate.yaml -t "signer:key" -v "signer=${signerfn}" --trust >> ./.release/notes.md
+          done
+          printf "\n" >> ./.release/notes.md
+
+          cp -R ./.release/targets/* ./.release/assets/
+          cp ./.release/notes.md ./.release/assets/
+
+  canary:verify:
+    env:
+      vars:
+        SHELLOPTS: 'errexit:nounset:pipefail'
+    description: "Verifies all signatures and hashes."
+    tasks:
+      - script: |-
+          for asset in ./.release/temp/*; do
+            for sig in $asset/*.sig; do
+              fn=$(basename -- ${asset})
+              echo "Verifying: ${sig%.sig} with signature ${sig}"
+              gpg --verify "$sig" "./.release/assets/${fn}"
+              echo ""
+            done
+            for hash in ./.release/assets/*.sha512; do
+              echo "Verifying: ${hash%.sha512} with hash ${hash}"
+              echo "$(cat ${hash}) ${hash%.sha512}" | sha512sum -c
+              echo ""
+            done
+          done
+
+  canary:release:
+    description: "Renders and signs the canary. Creates a new release with the current day (UTC)."
+    pre:
+      - name: "canary:sign"
+    tasks:
+      - script: |
+          if ! [ -z "$(git status --porcelain)" ]; then
+            echo "Dirty repo. Please commit all changes before releasing."
+            exit 1
+          fi
+      - script: |
+          if ! gh auth status >/dev/null 2>&1; then
+              echo "You need to login: gh auth login"
+              exit 1
+          fi
+      - script: |-
+          RELEASE=$(date --utc --iso-8601=date)
+          gh release create $RELEASE-$(date +%s) --latest --target=master --title="$RELEASE" --notes-file="./.release/notes.md" ./.release/assets/*

@@ -1,0 +1,83 @@
+version: 0.14
+templates:
+  "notes:header":
+    content:
+      inline: |
+        # Release notes
+
+        See `canary.md` for canary statement. Make sure to verify its content with the provided hash and signature.
+
+        ## How to verify
+        
+        - hash: `printf "$(cat ./$ASSET.sha512) ./$ASSET" | sha512sum -c`
+        - signature: `gpg --verify ./$SIGNER.sig ./$ASSET`
+    variables: {}
+
+  "asset:base":
+    content:
+      inline: |
+        ### `{{ asset }}`
+        
+        **SHA512 hash**: `{{ hash }}`
+    variables: {}
+
+  "asset:signer":
+    content:
+      inline: |
+        - `{{ signer }}`
+          ```
+        {{ _signature signature }}  ```
+    variables: {}
+    helpers:
+      "_signature": |-
+        cat $VALUE | sed 's/^/    /'
+
+  "signer:key":
+    content:
+      inline: |
+        - `{{ signer }}`
+          ```
+        {{ _pub signer }}  ```
+    variables: {}
+    helpers:
+      "_pub": |-
+        gpg --armor --export $VALUE | sed 's/^/    /'
+      
+  canary:
+    content:
+      file: "./tpl/canary.md.tpl"
+    variables:
+      "meta.time":
+        shell: |-
+          printf "\`$(date -R -u)\`"
+      "meta.random":
+        shell: |-
+          printf "\`$(head -c 128 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 32)\`"
+      "canary.time":
+        shell: |-
+          printf "Date: \`$(date -R -u)\`\n\n"
+          printf "Timestamp: \`$(date -u +%s)\`"
+      "canary.rss":
+        shell: |-
+          export RSSTAIL='rsstail -pl -e1 -n5'
+          declare -a RSS_FEEDS=(
+            "https://www.spiegel.de/international/index.rss"
+            "http://rss.cnn.com/rss/edition_world.rss"
+            "https://feeds.bbci.co.uk/news/world/rss.xml"
+            "https://www.theguardian.com/world/rss"
+          )
+          for i in "${RSS_FEEDS[@]}"
+          do
+            printf "\`\$ $RSSTAIL $i\`\n"
+            printf '```\n'
+            $RSSTAIL "$i"
+            printf '```\n'
+          done
+      "canary.btc":
+        shell: |-
+          printf "Total: \`"
+          curl https://blockchain.info/q/totalbc
+          printf "\`\n\n"
+          printf "Block count: \`"
+          curl https://blockchain.info/q/getblockcount
+          printf "\`\n"
