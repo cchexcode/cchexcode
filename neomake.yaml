@@ -1,0 +1,54 @@
+version: "0.6"
+
+env:
+  vars:
+    SHELLOPTS: 'errexit:nounset:xtrace:pipefail'
+
+.task-verify: &task-verify
+  script: |-
+    for file in ./signatures/*; do
+        if [ -f "$file" ]; then
+          printf "Verifying with: [$file]\n"
+          gpg --verify $file ./README.md
+        fi
+    done
+
+nodes:
+  generate:
+    tasks:
+      - script: |-
+          rm ./README.md || true
+          complate render -c ./complate.yaml -tREADME --trust > README.md
+  render:
+    pre:
+      - name: generate
+    tasks:
+      - script: |-
+          rm ./signatures/*.sig || true
+
+          declare -a SIGNERS=(
+            "alexanderh.weber@outlook.com"
+          )
+
+          for i in "${SIGNERS[@]}"
+          do
+            gpg --default-key="$i" --armor --detach-sig --output="./signatures/${i}.sig" README.md
+          done
+  sign:
+    pre:
+      - name: render
+    tasks:
+      # also performs verification
+      - *task-verify
+  verify:
+    tasks:
+      - *task-verify
+  release:
+    pre:
+      - name: render
+    tasks:
+      - *task-verify
+      - script: |-
+          git add .
+          git commit -S -m "canary release: $(date --utc --iso-8601=seconds)"
+          
