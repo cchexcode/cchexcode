@@ -1,0 +1,41 @@
+version: 0.14
+templates:
+  README:
+    content:
+      file: "./README.md.tpl"
+    variables:
+      "meta.time":
+        shell: |-
+          printf "\`$(date -R -u)\`"
+      "meta.random":
+        shell: |-
+          printf "\`$(head -c 128 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9' | head -c 32)\`"
+      "canary.time":
+        shell: |-
+          printf "Date: \`$(date -R -u)\`\n\n"
+          printf "Timestamp: \`$(date -u +%s)\`"
+      "canary.rss":
+        shell: |-
+          export RSSTAIL='rsstail -pl -e1 -n5'
+          declare -a RSS_FEEDS=(
+            "https://www.spiegel.de/international/index.rss"
+            "http://rss.cnn.com/rss/edition_world.rss"
+            "https://feeds.bbci.co.uk/news/world/rss.xml"
+            "https://www.theguardian.com/world/rss"
+          )
+
+          for i in "${RSS_FEEDS[@]}"
+          do
+            printf "\`\$ $RSSTAIL $i\`\n"
+            printf '```\n'
+            $RSSTAIL "$i"
+            printf '```\n'
+          done
+      "canary.btc":
+        shell: |-
+          printf "Total: \`"
+          curl https://blockchain.info/q/totalbc
+          printf "\`\n\n"
+          printf "Block count: \`"
+          curl https://blockchain.info/q/getblockcount
+          printf "\`\n"

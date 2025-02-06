@@ -1,0 +1,46 @@
+version: "0.6"
+
+.task-verify: &task-verify
+  script: |-
+    set -eu
+    for file in ./signatures/*; do 
+        if [ -f "$file" ]; then 
+          printf "Verifying with: [$file]\n"
+          gpg --verify $file ./README.md
+        fi 
+    done
+
+nodes:
+  generate:
+    tasks:
+      - script: |-
+         set -eu
+         rm ./README.md || true
+         complate render -c ./complate.yaml -tREADME --trust > README.md
+         
+  render:
+    pre:
+      - name: generate
+    tasks:
+      - script: |-
+          set -eu
+          rm ./signatures/*.sig
+
+          declare -a SIGNERS=(
+            "alexanderh.weber@outlook.com"
+          )
+          for i in "${SIGNERS[@]}"
+          do
+            gpg --output="./signatures/${i}.sig" --default-key="$i" --armor --detach-sig README.md
+          done
+
+  sign:
+    pre:
+      - name: render
+    tasks:
+      # also performs verification
+      - *task-verify
+
+  verify:
+    tasks:
+      - *task-verify

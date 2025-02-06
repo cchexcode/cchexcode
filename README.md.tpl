@@ -28,8 +28,8 @@ Please report any security related issues to the E-Mail address above and _do no
 
 ## Canary statement
 
-Issue date: `Thu, 06 Feb 2025 01:33:15 +0000`\
-Random: `xG9YfBQrGaahqVjeqUMyIEBT3npzlNxZ`
+Issue date: {{ meta.time }}\
+Random: {{ meta.random }}
 
 **Signers:**
 
@@ -60,54 +60,17 @@ This declaration is provided without any guarantee or warranty. It is not legall
 
 ### Timestamp
 
-Date: `Thu, 06 Feb 2025 01:33:15 +0000`
-
-Timestamp: `1738805595`
+{{ canary.time }}
 
 ### Proof of freshness
 
 #### RSS feeds
 
-`$ rsstail -pl -e1 -n5 https://www.spiegel.de/international/index.rss`
-```
-Pubdate:   Title: Putting Nuuk on the Map: Trump's Interest in Greenland Fuels Urge for Independence  
-Pubdate:   Title: Manipulation from Abroad: German Election Campaign Flooded with Fake News and Videos  
-Pubdate:   Title: Ukraine Is Running Out of People - A Demographic Catastrophe  
-Pubdate:   Title: Finland Confronts Its WWII History: "If You Only Knew How Many Jews I Have Shot"  
-Pubdate:   Title: Interview with Pelicot Daughter Caroline Darian: "My Father No Longer Exists for Me"  
-```
-`$ rsstail -pl -e1 -n5 http://rss.cnn.com/rss/edition_world.rss`
-```
-Pubdate:   Title: Markets digest bank earnings after recent turmoil   
-Pubdate:   Title: Still haven't filed your taxes? Here's what you need to know  
-Pubdate:   Title: Retail spending fell in March as consumers pull back  
-Pubdate:   Title: Analysis: Fox News is about to enter the true No Spin Zone  
-Pubdate:   Title: Silicon Valley Bank collapse renews calls to address disparities impacting entrepreneurs of color  
-```
-`$ rsstail -pl -e1 -n5 https://feeds.bbci.co.uk/news/world/rss.xml`
-```
-Pubdate:   Title: Jeremy Bowen: Trump's Gaza plan won't happen, but it will have consequences  
-Pubdate:   Title: Why does Trump want to take over Gaza and could he do it?  
-Pubdate:   Title: Sweden searches for answers after country's deadliest shooting  
-Pubdate:   Title: What do we know about the Sweden school shooter?    
-Pubdate:   Title: Strong earthquake near Santorini after days of tremors  
-```
-`$ rsstail -pl -e1 -n5 https://www.theguardian.com/world/rss`
-```
-Pubdate: 2025/02/05 20:09:00  Title: Rwandan-backed M23 rebels launch new offensive in DRC  
-Pubdate: 2025/02/05 10:00:34  Title: Flies in hospital wards may be spreading drug-resistant bacteria to patients  
-Pubdate: 2025/02/05 08:00:33  Title: Hundreds of women raped and burned to death after Goma prison set on fire  
-Pubdate: 2025/02/04 19:11:51  Title: Mauritian PM expects ‘speedy resolution’ with UK over Chagos Islands  
-Pubdate: 2025/02/04 16:28:45  Title: Deaths predicted amid the chaos of Elon Musk’s shutdown of USAid  
-```
-
+{{ canary.rss }}
 
 #### Bitcoin infrastructure
 
-Total: `1982025300000000`
-
-Block count: `882484`
-
+{{ canary.btc }}
 
 ### How to use
 
