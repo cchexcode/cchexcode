@@ -29,8 +29,8 @@ Please report any security related issues to the E-Mail address above and _do no
 
 ## Canary statement
 
-Issue date: `Mon, 10 Feb 2025 17:14:01 +0000`\
-Random: `6X9gga2K4Y0ORJNnwHkoObTzfmCTQApq`
+Issue date: `Mon, 10 Feb 2025 17:15:11 +0000`\
+Random: `a9ddMKodOhVgAZWQpbgPUg3CCSgW1YyD`
 
 **Signers:**
 
@@ -61,9 +61,9 @@ This declaration is provided without any guarantee or warranty. It is not legall
 
 ### Timestamp
 
-Date: `Mon, 10 Feb 2025 17:14:01 +0000`
+Date: `Mon, 10 Feb 2025 17:15:12 +0000`
 
-Timestamp: `1739207641`
+Timestamp: `1739207712`
 
 ### Proof of freshness
 
@@ -107,7 +107,7 @@ Pubdate: 2025/02/08 16:59:47  Title: Rwandan and Congolese leaders join summit o
 
 Total: `1982245900000000`
 
-Block count: `883195`
+Block count: `883196`
 
 
 ### How to use
