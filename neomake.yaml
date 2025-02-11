@@ -6,7 +6,7 @@ env:
 
 .task-verify: &task-verify
   script: |-
-    for file in ./signatures/*; do
+    for file in ./signatures/*.sig; do
         if [ -f "$file" ]; then
           printf "Verifying with: [$file]\n"
           gpg --verify $file ./README.md
@@ -27,14 +27,8 @@ nodes:
     tasks:
       - script: |-
           rm ./signatures/*.sig || true
-
-          declare -a SIGNERS=(
-            "alexanderh.weber@outlook.com"
-          )
-
-          for i in "${SIGNERS[@]}"
-          do
-            gpg --default-key="$i" --armor --detach-sig --output="./signatures/${i}.sig" README.md
+          for signer in $(cat ./signatures/signers.txt); do
+            gpg --default-key="${signer}" --armor --detach-sig --output="./signatures/${signer}.sig" README.md
           done
       - *task-verify
   verify:
