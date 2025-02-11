@@ -87,6 +87,8 @@ Required workflow dependencies:
 
 Commands:
 
+- Releasing a new statement (sign + verify):\
+  `neomake plan -n release | neomake x`
 - Signing a new version of the canary:\
   `neomake plan -n sign | neomake x`
 - Verifying the signatures:\

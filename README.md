@@ -29,8 +29,8 @@ Please report any security related issues to the E-Mail address above and _do no
 
 ## Canary statement
 
-Issue date: `Mon, 10 Feb 2025 17:15:11 +0000`\
-Random: `a9ddMKodOhVgAZWQpbgPUg3CCSgW1YyD`
+Issue date: `Tue, 11 Feb 2025 05:35:17 +0000`\
+Random: `hVckhNNWpXHSQ78TN8eyZ0R4NEvkNej4`
 
 **Signers:**
 
@@ -61,9 +61,9 @@ This declaration is provided without any guarantee or warranty. It is not legall
 
 ### Timestamp
 
-Date: `Mon, 10 Feb 2025 17:15:12 +0000`
+Date: `Tue, 11 Feb 2025 05:35:20 +0000`
 
-Timestamp: `1739207712`
+Timestamp: `1739252120`
 
 ### Proof of freshness
 
@@ -87,11 +87,11 @@ Pubdate:   Title: Silicon Valley Bank collapse renews calls to address dispariti
 ```
 `$ rsstail -pl -e1 -n5 https://feeds.bbci.co.uk/news/world/rss.xml`
 ```
-Pubdate:   Title: Romania president resigns after impeachment pressure over cancelled vote  
-Pubdate:   Title: Macron shares his deepfakes for AI summit attention  
-Pubdate:   Title: Trump says no right of return for Palestinians under Gaza plan  
-Pubdate:   Title: South Africa mourns pioneering female nuclear scientist  
-Pubdate:   Title: What to know about the Salman Rushdie stabbing trial  
+Pubdate:   Title: Hamas says it will postpone hostage release, blaming Israel  
+Pubdate:   Title: Paul Adams: Why the Gaza ceasefire is under growing strain  
+Pubdate:   Title: Trump announces 25% tariffs on all steel and aluminium imports  
+Pubdate:   Title: Lawyer in Saudi trans student's suicide note had embassy links, BBC finds  
+Pubdate:   Title: Plughole-like dam creates mesmerising water display  
 ```
 `$ rsstail -pl -e1 -n5 https://www.theguardian.com/world/rss`
 ```
@@ -105,9 +105,9 @@ Pubdate: 2025/02/08 16:59:47  Title: Rwandan and Congolese leaders join summit o
 
 #### Bitcoin infrastructure
 
-Total: `1982245900000000`
+Total: `1982268100000000`
 
-Block count: `883196`
+Block count: `883258`
 
 
 ### How to use
@@ -124,6 +124,8 @@ Required workflow dependencies:
 
 Commands:
 
+- Releasing a new statement (sign + verify):\
+  `neomake plan -n release | neomake x`
 - Signing a new version of the canary:\
   `neomake plan -n sign | neomake x`
 - Verifying the signatures:\

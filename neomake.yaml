@@ -14,14 +14,16 @@ env:
     done
 
 nodes:
-  generate:
+  render:
+    description: "Renders a new README.md file using `complate`."
     tasks:
       - script: |-
           rm ./README.md || true
           complate render -c ./complate.yaml -tREADME --trust > README.md
-  render:
+  sign:
+    description: "Signs the README.md with the given signers."
     pre:
-      - name: generate
+      - name: render
     tasks:
       - script: |-
           rm ./signatures/*.sig || true
@@ -34,20 +36,16 @@ nodes:
           do
             gpg --default-key="$i" --armor --detach-sig --output="./signatures/${i}.sig" README.md
           done
-  sign:
-    pre:
-      - name: render
-    tasks:
-      # also performs verification
       - *task-verify
   verify:
+    description: "Verifies all signatures in `./signatures` against the README.md file."
     tasks:
       - *task-verify
   release:
+    description: "Renders, signs and verifies the README.md file. Also commits changes using a standard commit message."
     pre:
-      - name: render
+      - name: sign
     tasks:
-      - *task-verify
       - script: |-
           git add .
           git commit -S -m "canary release: $(date --utc --iso-8601=seconds)"
