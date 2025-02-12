@@ -22,6 +22,8 @@
   -----END PGP PUBLIC KEY BLOCK-----
 
   ```
+  Keyserver:
+  - keys.openpgp.org
 
 ## Responsible disclosures
 
@@ -29,8 +31,8 @@ Please report any security related issues to the E-Mail address above and _do no
 
 ## Canary statement
 
-Issue date: `Tue, 11 Feb 2025 06:23:35 +0000`\
-Random: `7dORqOxVZoe4W5t1euyiPMth8IjwRfMB`
+Issue date: `Wed, 12 Feb 2025 06:14:30 +0000`\
+Random: `dHCSHMoAmROVhmKR12KsMNmeGemMpI9f`
 
 **Signers:**
 
@@ -61,9 +63,9 @@ This declaration is provided without any guarantee or warranty. It is not legall
 
 ### Timestamp
 
-Date: `Tue, 11 Feb 2025 06:23:35 +0000`
+Date: `Wed, 12 Feb 2025 06:14:30 +0000`
 
-Timestamp: `1739255015`
+Timestamp: `1739340870`
 
 ### Proof of freshness
 
@@ -87,27 +89,27 @@ Pubdate:   Title: Silicon Valley Bank collapse renews calls to address dispariti
 ```
 `$ rsstail -pl -e1 -n5 https://feeds.bbci.co.uk/news/world/rss.xml`
 ```
-Pubdate:   Title: Hamas says it will postpone hostage release, blaming Israel  
-Pubdate:   Title: Paul Adams: Why the Gaza ceasefire is under growing strain  
-Pubdate:   Title: Lawyer in Saudi trans student's suicide note had embassy links, BBC finds  
-Pubdate:   Title: Trump announces 25% tariffs on all steel and aluminium imports  
-Pubdate:   Title: Plughole-like dam creates mesmerising water display  
+Pubdate:   Title: Trade, tariffs and visas to dominate Trump-Modi talks  
+Pubdate:   Title: Israel says Gaza ceasefire will end if Hamas does not free hostages by Saturday  
+Pubdate:   Title: Oil clean-up 'scam' warnings ignored by Shell, whistle-blower tells BBC  
+Pubdate:   Title: Trump welcomes back teacher released by Russia      
+Pubdate:   Title: Australian nurses stood down over 'vile' antisemitic video  
 ```
 `$ rsstail -pl -e1 -n5 https://www.theguardian.com/world/rss`
 ```
+Pubdate: 2025/02/11 08:00:14  Title: Campaigner for migrants in Libya targeted in spyware attack  
+Pubdate: 2025/02/11 07:25:48  Title: ‘Each of us is afraid’: Guinea’s junta leader tightens grip as opposition lies low  
 Pubdate: 2025/02/10 12:06:36  Title: Fears grow for health of social media influencer arrested on live TV in Sierra Leone  
 Pubdate: 2025/02/10 06:53:17  Title: Monday briefing: Why the brutal fighting in the Democratic Republic of Congo could spiral into wider war  
 Pubdate: 2025/02/10 05:00:09  Title: Bo-Kaap: the candy-coloured corner of Cape Town facing tourism v heritage dilemma  
-Pubdate: 2025/02/09 05:59:08  Title: Sam Nujoma, Namibia’s first president, dies aged 95  
-Pubdate: 2025/02/08 16:59:47  Title: Rwandan and Congolese leaders join summit on eastern DRC conflict  
 ```
 
 
 #### Bitcoin infrastructure
 
-Total: `1982268100000000`
+Total: `1982307800000000`
 
-Block count: `883265`
+Block count: `883392`
 
 
 ### How to use

@@ -22,6 +22,8 @@
   -----END PGP PUBLIC KEY BLOCK-----
 
   ```
+  Keyserver:
+  - keys.openpgp.org
 
 ## Responsible disclosures
 
