@@ -9,7 +9,7 @@ Please find the most recent releases of my warrant canary [on this page](https:/
 ## PGP public key:
 
 - <a href="mailto:alexanderh.weber@outlook.com">alexanderh.weber@outlook.com</a>\
-  <a href="https://raw.githubusercontent.com/cchexcode/cchexcode/master/pgp/alexanderh.weber%40outlook.com.pub">Fingerprint: `B98B2E3858795B3496887D02B425F4002B69055B2CEDE72CE2922FB50D32C1C3`</a>
+  <a href="https://raw.githubusercontent.com/cchexcode/cchexcode/master/alexanderh.weber%40outlook.com.pub">Fingerprint: `B98B2E3858795B3496887D02B425F4002B69055B2CEDE72CE2922FB50D32C1C3`</a>
   ```
   -----BEGIN PGP PUBLIC KEY BLOCK-----
   
