@@ -10,7 +10,7 @@ Please see [my personal canary statement](https://canarycommand.com/p/a7df591e-0
 ## PGP public key:
 
 - <a href="mailto:aw@vigilantfrontier.com">aw@vigilantfrontier.com</a>\
-  <a href="https://raw.githubusercontent.com/cchexcode/cchexcode/master/cchexcode.pub">Fingerprint: `E25C54BF5FE77F8534E94740194876C23335B334`</a>
+  <a href="https://raw.githubusercontent.com/cchexcode/cchexcode/refs/heads/master/cchexcode.pub">Fingerprint: `E25C54BF5FE77F8534E94740194876C23335B334`</a>
   ```
   -----BEGIN PGP PUBLIC KEY BLOCK-----
   
