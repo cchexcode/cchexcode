@@ -7,7 +7,7 @@
 I use [Canary Command](https://canarycommand.com) for my warrant canary.\
 Please see [my personal canary statement](https://canarycommand.com/p/a7df591e-0c96-43c4-8237-b890ca393cb7) for more information.
 
-[![Canary Status](https://canarycommand.com/api/v1/public/canary/a7df591e-0c96-43c4-8237-b890ca393cb7/badge.svg?style=full)](https://canarycommand.com/c/a7df591e-0c96-43c4-8237-b890ca393cb7)
+[![Canary Status](https://canarycommand.com/api/v1/public/canary/a7df591e-0c96-43c4-8237-b890ca393cb7/badge.svg?style=full)](https://canarycommand.com/p/a7df591e-0c96-43c4-8237-b890ca393cb7)
 
 ## PGP public key:
 
